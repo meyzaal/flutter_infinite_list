@@ -23,7 +23,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc({required this.httpClient}) : super(const PostState()) {
     on<PostFetched>(_onPostFetched,
         transformer: throttleDroppable(throttleDuration));
-    on<PostFailure>(_onPostFailure);
   }
 
   final http.Client httpClient;
@@ -53,14 +52,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     } catch (_) {
       emit(state.copyWith(status: PostStatus.failure));
     }
-  }
-
-  Future<void> _onPostFailure(
-    PostFailure event,
-    Emitter<PostState> emit,
-  ) async {
-    emit(state.copyWith(status: PostStatus.initial));
-    await _onPostFetched(PostFetched(), emit);
   }
 
   Future<List<Post>> _fetchPosts([int startIndex = 0]) async {

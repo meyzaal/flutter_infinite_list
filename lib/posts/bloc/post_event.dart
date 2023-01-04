@@ -9,6 +9,4 @@ abstract class PostEvent extends Equatable {
 
 class PostFetched extends PostEvent {}
 
-class PostFailure extends PostEvent {
-  const PostFailure();
-}
+

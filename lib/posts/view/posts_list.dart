@@ -46,20 +46,8 @@ class _PostsListState extends State<PostsList> {
               controller: _scrollController,
             );
           case PostStatus.failure:
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('failed to fetch posts'),
-                  const SizedBox(height: 16.0),
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        context.read<PostBloc>().add(const PostFailure());
-                      },
-                      icon: const Icon(Icons.refresh),
-                      label: const Text('Refresh'))
-                ],
-              ),
+            return const Center(
+              child: Text('failed to fetch posts'),
             );
         }
       },
